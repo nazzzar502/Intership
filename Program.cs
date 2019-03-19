@@ -17,7 +17,7 @@ namespace InternshipTest
 
 
 
-            var s = new Student("Alex");
+           
             University university = new University("CH.U.I.");
             // university.AddStudent(new Student("Andrew Kostenko"));
             //  university.AddStudent(new Student("Julia Veselkina"));
@@ -31,53 +31,72 @@ namespace InternshipTest
             string name;
             string level;
             int number = 0;
-            int a;
-            while (state == false)
-            {
-                number += 1;
 
-                Console.WriteLine("Введіть імя студента");
-                name = Console.ReadLine();
-
-                Console.WriteLine("Введіть рівень знань студента А,B,C,D,F");
-                level = Console.ReadLine();
-
-                Student student = new Student(name);
-
-                switch (level)
+            Console.WriteLine("Load students from file? Yes/No");
+            if(Console.ReadLine() == "Yes") {
+                while (state == false)
                 {
+                    number += 1;
 
-                    case "A":
-                        student.SetKnowledge(A);
+                    Console.WriteLine("Введіть імя студента");
+                    name = Console.ReadLine();
 
-                        break;
-                    case "B":
-                        student.SetKnowledge(B);
+                    Console.WriteLine("Введіть рівень знань студента А,B,C,D,F");
+                    level = Console.ReadLine();
 
-                        break;
-                    case "C":
-                        student.SetKnowledge(C);
+                    Student student = new Student(name);
 
-                        break;
-                    case "D":
-                        student.SetKnowledge(D);
+                    switch (level)
+                    {
 
-                        break;
-                    case "F":
-                        student.SetKnowledge(F);
+                        case "A":
+                            student.SetKnowledge(A);
 
-                        break;
-                    default:
-                        break;
+                            break;
+                        case "B":
+                            student.SetKnowledge(B);
 
+                            break;
+                        case "C":
+                            student.SetKnowledge(C);
+
+                            break;
+                        case "D":
+                            student.SetKnowledge(D);
+
+                            break;
+                        case "F":
+                            student.SetKnowledge(F);
+
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                    university.AddStudent(number, student);
+
+                    Console.WriteLine("Продовжити? Yes/No");
+                    if (Console.ReadLine() == "No") { state = true; }
                 }
-
-                university.AddStudent(number, student);
-
-                Console.WriteLine("Продовжити? Yes/No");
-                if (Console.ReadLine() == "No") { state = true; }
             }
+            else
+            {
+               Student Ane = new Student("Ane");
+                Ane.SetKnowledge(A);
+                Student Jane = new Student("Jane");
+                Jane.SetKnowledge(B);
+                Student Michael = new Student("Michael");
+                Michael.SetKnowledge(D);
+                Student Andrew = new Student("Andrew");
+                Andrew.SetKnowledge(A);
+                Student Bill = new Student("Bill");
+                Bill.SetKnowledge(C);
 
+                
+                university.students = new Student[] { Ane, Andrew, Jane, Michael, Bill };
+                number = 5;
+            }
             // Console.WriteLine(university.students[1].student_name);
 
             internship.GetStudents(university, number);
